@@ -1,9 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Hangman from "@/components/Hangman";
+import Header from "@/components/Header";
+import Keyboard from "@/components/Keyboard";
+import styles from "@/styles/Home.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+import React from "react";
+import { useState, useCallback } from "react";
+
+const testWord = "patio";
 
 export default function Home() {
   const [guessedLetters, setGuessedLetters] = useState([]);
@@ -35,8 +38,8 @@ export default function Home() {
       <Keyboard
         guess={guessedLetters}
         addGuessLetter={addGuessLetter}
-        incorrect={guessedLetters.filter((elem)=> !testWord.includes(elem))}
-        correct={guessedLetters.filter((elem)=> testWord.includes(elem))}
+        incorrect={guessedLetters.filter((elem) => !testWord.includes(elem))}
+        correct={guessedLetters.filter((elem) => testWord.includes(elem))}
       />
     </div>
   );
