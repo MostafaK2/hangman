@@ -6,10 +6,10 @@ const KEYS = [
   ["z", "x", "c", "v", "b", "n", "m"],
 ];
 export default function Keyboard({
-  
   addGuessLetter,
   correct,
   incorrect,
+  endGame,
 }) {
   console.log("correct: ", correct);
   console.log("incorrect: ", incorrect);
@@ -28,7 +28,7 @@ export default function Keyboard({
                     isDisabled ? styles.inactive : ""
                   }`}
                   key={key}
-                  disabled={isActive || isDisabled}
+                  disabled={isActive || isDisabled || endGame}
                 >
                   {key}
                 </button>
