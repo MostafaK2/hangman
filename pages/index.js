@@ -9,32 +9,37 @@ import { useCallback, useEffect, useState } from "react";
 const testWord = "Patio";
 
 export default function Home() {
-  const [correctGuessedLetters, setCorrectGuessedLetters] = useState([]);
-  const [incorrectGuesses, setIncorrectGuesses] = useState([]);
-  const [guess, setGuess] = useState("");
-
+  const [guessedLetters, setGuessedLetters] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
 
-  useEffect(() => {
-    if (guess.length > 0) {
-      if (testWord.includes(guess)) {
-        correctGuessedLetters.push(guess);
-        setCorrectGuessedLetters(correctGuessedLetters);
-      } else {
-        incorrectGuesses.push(guess);
-        setIncorrectGuesses(incorrectGuesses);
-      }
-    }
-  });
+  const addGuessLetter = useCallback(
+    (elem) => {
+      setGuessedLetters((curr) => [...curr, elem]);
+    },
+    [guessedLetters]
+  );
+
+  // useEffect(() => {
+  //   if (guess.length > 0) {
+  //     if (testWord.includes(guess)) {
+  //       correctGuessedLetters.push(guess);
+  //       setCorrectGuessedLetters(correctGuessedLetters);
+  //     } else {
+  //       incorrectGuesses.push(guess);
+  //       setIncorrectGuesses(incorrectGuesses);
+  //     }
+  //   }
+  // });
 
   return (
     <div className={styles.main}>
       <Header />
       <Hangman />
       <Keyboard
-        setGuess={setGuess}
-        incorrect={incorrectGuesses}
-        correct={correctGuessedLetters}
+        guess={guessedLetters}
+        addGuessLetter={addGuessLetter}
+        incorrect={guessedLetters.filter((elem)=> !testWord.includes(elem))}
+        correct={guessedLetters.filter((elem)=> testWord.includes(elem))}
       />
     </div>
   );

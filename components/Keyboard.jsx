@@ -5,7 +5,12 @@ const KEYS = [
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
   ["z", "x", "c", "v", "b", "n", "m"],
 ];
-export default function Keyboard({ setGuess, correct, incorrect }) {
+export default function Keyboard({
+  
+  addGuessLetter,
+  correct,
+  incorrect,
+}) {
   console.log("correct: ", correct);
   console.log("incorrect: ", incorrect);
   return (
@@ -15,16 +20,15 @@ export default function Keyboard({ setGuess, correct, incorrect }) {
           <div className={styles.child}>
             {elem.map((key) => {
               const isActive = correct.includes(key);
-
               const isDisabled = incorrect.includes(key);
               return (
                 <button
-                  onClick={() => setGuess(key)}
+                  onClick={() => addGuessLetter(key)}
                   className={`${styles.btn} ${isActive ? styles.active : ""} ${
                     isDisabled ? styles.inactive : ""
                   }`}
                   key={key}
-                  disabled={false}
+                  disabled={isActive || isDisabled}
                 >
                   {key}
                 </button>
