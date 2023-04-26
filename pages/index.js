@@ -39,9 +39,6 @@ export default function Home() {
     return charArray;
   };
 
-  console.log("word to guess, " + wordToGuess);
-  console.log("correct guess, " + correctGuesses);
-
   useEffect(() => {
     if (
       wordToGuess.length === correctGuesses.length &&

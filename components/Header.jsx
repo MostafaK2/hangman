@@ -1,10 +1,13 @@
 import React from "react";
+import styles from "../styles/Header.module.css"
 
 export default function Header(props) {
   return (
-    <div>
-      Tittle, Log Out, Settings, show leaderboard, if its randomly gen user
-      soemthing else
+    <div className={styles["parent"]}>
+      <h2>username</h2>
+      <h1>Hangman</h1>
+      <button>Leaderboard</button>
+      <button>Settings</button>
     </div>
   );
 }
