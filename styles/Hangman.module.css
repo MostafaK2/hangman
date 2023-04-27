@@ -1,6 +1,104 @@
-.child{
-	display: flex;
-	flex-direction: row;
-	gap: 1rem;
-	text-transform: uppercase;
+.child {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  text-transform: uppercase;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.base {
+  height: 5px;
+  width: 200px;
+  background-color: black;
+  margin-left: 50px;
+}
+
+.stand {
+  height: 250px;
+  width: 5px;
+  background-color: black;
+  margin-left: 100px;
+}
+
+.noose1 {
+  height: 5px;
+  width: 100px;
+  background-color: black;
+  margin-left: 100px;
+}
+
+.noose2 {
+  height: 35px;
+  width: 5px;
+  background-color: black;
+  margin-left: 200px;
+  position: absolute;
+}
+
+.head {
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  border: 5px solid black;
+  position: absolute;
+  margin-left: 185px;
+  margin-top: 35px;
+}
+
+.body {
+  height: 80px;
+  width: 5px;
+  background-color: black;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 70px;
+}
+
+.leftarm {
+  height: 5px;
+  width: 50px;
+  background-color: black;
+  position: absolute;
+  rotate: 30deg;
+  left: 200px;
+  top: 80px;
+  transform-origin: left bottom;
+}
+
+.rightarm {
+  height: 5px;
+  width: 50px;
+  background-color: black;
+  position: absolute;
+  rotate: 150deg;
+  left: 200px;
+  top: 78px;
+  transform-origin: left bottom;
+}
+
+.leftleg {
+  height: 70px;
+  width: 5px;
+  background-color: black;
+  position: absolute;
+  rotate: 150deg;
+  left: 205px;
+  top: 75px;
+  transform-origin: left bottom;
+}
+
+.rightleg {
+  height: 70px;
+  width: 5px;
+  background-color: black;
+  position: absolute;
+  rotate: -150deg;
+  left: 205px;
+  top: 75px;
+  transform-origin: left bottom;
 }
