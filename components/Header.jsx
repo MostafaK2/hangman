@@ -7,6 +7,7 @@ export default function Header(props) {
       <h2>username</h2>
       <h1>Hangman</h1>
       <button>Leaderboard</button>
+      <button>Create Custom Game</button>
       <button> Settings with Logout</button>
     </div>
   );
