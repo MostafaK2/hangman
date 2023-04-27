@@ -5,8 +5,8 @@ export default async function handler(req, res) {
     const db = client.db("hangman");
     switch (req.method) {
         case "POST": {
-            const {body: {username, password}} = req;
-            const insertedTask = await db.collection("hangman-user").insertOne({username, password});
+            const {body} = req;
+            const insertedTask = await db.collection("hangman-user").insertOne({...body});
             console.log(insertedTask);
             res.json({status: 200});
             break;
