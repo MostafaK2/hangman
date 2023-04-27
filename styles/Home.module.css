@@ -1,11 +1,16 @@
-.main {
+/* .main {
+
+} */
+
+.content {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   align-items: center;
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .start {
-  padding: 10px;
+  padding: 0.625rem;
 }

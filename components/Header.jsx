@@ -4,11 +4,19 @@ import styles from "../styles/Header.module.css";
 export default function Header(props) {
   return (
     <div className={styles["parent"]}>
-      <h2>username</h2>
       <h1>Hangman</h1>
-      <button>Leaderboard</button>
-      <button>Create Custom Game</button>
-      <button> Settings with Logout</button>
+      <div className={styles["header-buttons"]}>
+        <button className={styles["header-button"]}>Leaderboard</button>
+        <button className={styles["header-button"]}>Create Custom Game</button>
+        <button className={styles["header-button"]}>
+          {" "}
+          Settings with Logout
+        </button>
+        <button className={styles["header-button"]} onClick={props.onClick}>
+          Reset Game
+        </button>
+      </div>
+      <h2>Username</h2>
     </div>
   );
 }
