@@ -61,21 +61,23 @@ export default function Home() {
 
   return (
     <div className={styles.main}>
-      <Header />
-      <Hangman
-        correct={correctGuesses}
-        incorrect={incorrectGuesses}
-        word={testWord}
-        resetGame={resetGame}
-      />
+      <Header onClick={resetGame} />
+      <div className={styles.content}>
+        <Hangman
+          correct={correctGuesses}
+          incorrect={incorrectGuesses}
+          word={testWord}
+          resetGame={resetGame}
+        />
 
-      {showKeyboard ? (<Keyboard
-        guess={guessedLetters}
-        addGuessLetter={addGuessLetter}
-        incorrect={incorrectGuesses}
-        correct={guessedLetters.filter((elem) => testWord.includes(elem))}
-        endGame={incorrectGuesses.length > 5 || winGame}
-      />) : (<button className={styles.start} onClick={handleStartGame}>Start game</button>)}
+        {showKeyboard ? (<Keyboard
+          guess={guessedLetters}
+          addGuessLetter={addGuessLetter}
+          incorrect={incorrectGuesses}
+          correct={guessedLetters.filter((elem) => testWord.includes(elem))}
+          endGame={incorrectGuesses.length > 5 || winGame}
+        />) : (<button className={styles.start} onClick={handleStartGame}>Start game</button>)}
+      </div>
     </div>
   );
 }
