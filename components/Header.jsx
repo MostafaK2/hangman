@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Header.module.css"
+import styles from "../styles/Header.module.css";
 
 export default function Header(props) {
   return (
@@ -7,7 +7,7 @@ export default function Header(props) {
       <h2>username</h2>
       <h1>Hangman</h1>
       <button>Leaderboard</button>
-      <button>Settings</button>
+      <button> Settings with Logout</button>
     </div>
   );
 }

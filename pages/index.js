@@ -25,6 +25,12 @@ export default function Home() {
     [guessedLetters]
   );
 
+  const resetGame = useCallback(() => {
+    setGuessedLetters([]);
+    setWingame(false)
+    // fetch the new word based on difficulty
+  }, [guessedLetters, winGame]);
+
   const incorrectGuesses = guessedLetters.filter(
     (elem) => !testWord.includes(elem)
   );
@@ -55,6 +61,7 @@ export default function Home() {
         correct={correctGuesses}
         incorrect={incorrectGuesses}
         word={testWord}
+        resetGame = {resetGame}
       />
       <Keyboard
         guess={guessedLetters}
