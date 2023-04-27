@@ -5,3 +5,7 @@
   align-items: center;
   gap: 2rem;
 }
+
+.start {
+  padding: 10px;
+}

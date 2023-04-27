@@ -13,6 +13,11 @@ export default function Home() {
   const [wordToGuess, setWordToGuess] = useState("");
   const [winGame, setWingame] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [showKeyboard, setShowKeyboard] = useState(false);
+
+  const handleStartGame = () => {
+    setShowKeyboard(true);
+  }
 
   useEffect(() => {
     setWordToGuess(getUniqueChar(testWord));
@@ -63,13 +68,14 @@ export default function Home() {
         word={testWord}
         resetGame={resetGame}
       />
-      <Keyboard
+
+      {showKeyboard ? (<Keyboard
         guess={guessedLetters}
         addGuessLetter={addGuessLetter}
         incorrect={incorrectGuesses}
         correct={guessedLetters.filter((elem) => testWord.includes(elem))}
         endGame={incorrectGuesses.length > 5 || winGame}
-      />
+      />) : (<button className={styles.start} onClick={handleStartGame}>Start game</button>)}
     </div>
   );
 }
