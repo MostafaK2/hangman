@@ -1,7 +1,9 @@
 import Hangman from "@/components/Hangman";
 import Header from "@/components/Header";
 import Keyboard from "@/components/Keyboard";
+
 import styles from "@/styles/Home.module.css";
+import styles2 from "@/styles/Header.module.css";
 
 import React, { useEffect, useInsertionEffect } from "react";
 import { useState, useCallback } from "react";
@@ -80,7 +82,7 @@ export default function Home() {
             endGame={incorrectGuesses.length > 5 || winGame}
           />
         ) : (
-          <button className={styles.start} onClick={handleStartGame}>
+          <button className={styles2["button-28"]} onClick={handleStartGame}>
             {winGame || incorrectGuesses.length > 5
               ? "Play Again"
               : "Start game"}

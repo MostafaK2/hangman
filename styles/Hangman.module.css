@@ -115,14 +115,10 @@
   align-items: center;
 }
 
-.box.correct{
+.box.correct {
   background-color: greenyellow;
 }
 
-.box.incorrect{
+.box.incorrect {
   background-color: rgb(245, 108, 108);
 }
-
-
-
-

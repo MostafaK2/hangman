@@ -8,9 +8,16 @@
   margin: 0 auto;
   align-items: center;
   gap: 2rem;
-  margin-top: 2rem;
-}
+  margin-top: 1rem;
 
-.start {
-  padding: 0.625rem;
+  border: 1px solid black;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding: 0 2rem;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  border-radius: 10px 10px;
+  background-color: bisque;
+  
 }
