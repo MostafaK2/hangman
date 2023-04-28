@@ -12,12 +12,13 @@ export default function Home() {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
   const [winGame, setWingame] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
 
   const handleStartGame = () => {
     setShowKeyboard(true);
-  }
+    setWingame(false);
+    setGuessedLetters([]);
+  };
 
   useEffect(() => {
     setWordToGuess(getUniqueChar(testWord));
@@ -70,13 +71,21 @@ export default function Home() {
           resetGame={resetGame}
         />
 
-        {showKeyboard ? (<Keyboard
-          guess={guessedLetters}
-          addGuessLetter={addGuessLetter}
-          incorrect={incorrectGuesses}
-          correct={guessedLetters.filter((elem) => testWord.includes(elem))}
-          endGame={incorrectGuesses.length > 5 || winGame}
-        />) : (<button className={styles.start} onClick={handleStartGame}>Start game</button>)}
+        {showKeyboard && !winGame && incorrectGuesses.length < 6 ? (
+          <Keyboard
+            guess={guessedLetters}
+            addGuessLetter={addGuessLetter}
+            incorrect={incorrectGuesses}
+            correct={guessedLetters.filter((elem) => testWord.includes(elem))}
+            endGame={incorrectGuesses.length > 5 || winGame}
+          />
+        ) : (
+          <button className={styles.start} onClick={handleStartGame}>
+            {winGame || incorrectGuesses.length > 5
+              ? "Play Again"
+              : "Start game"}
+          </button>
+        )}
       </div>
     </div>
   );
