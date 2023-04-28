@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styles from "../styles/Login-Signup.module.css";
-import signup from "../pages/api/signup";
+// import signup from "./api/signup";
+// import clientPromise from "@/lib/db";
 import axios from "axios";
 
-function SignUp() {
+function signup() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
@@ -13,7 +14,7 @@ function SignUp() {
     try {
       const response = await axios.post("/api/signup", {
         name,
-        email,
+        username,
         password,
       });
       console.log(response.data);
@@ -40,8 +41,8 @@ function SignUp() {
           placeholder="username"
           type="text"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
 
         <input
@@ -60,4 +61,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default signup;

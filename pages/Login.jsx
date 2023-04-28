@@ -1,15 +1,21 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "../styles/Login-Signup.module.css";
+import Link from "next/link";
+import axios from "axios";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password });
+      const response = await axios.post("/api/login", { username, password });
       console.log(response.data);
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -23,9 +29,9 @@ function Login() {
           className={styles.input}
           type="text"
           id="email"
-          value={email}
+          value={username}
           placeholder="Username"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           className={styles.input}
@@ -38,6 +44,12 @@ function Login() {
         <button className={styles.button} type="submit">
           Submit
         </button>
+        <div className="">
+          Do not have an account?{" "}
+          <Link href="/signup" className={styles.signup}>
+            Sign Up
+          </Link>
+        </div>
       </form>
     </div>
   );
