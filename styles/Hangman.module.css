@@ -102,3 +102,27 @@
   top: 75px;
   transform-origin: left bottom;
 }
+
+.box {
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 1px solid black;
+  border-radius: 5px 5px;
+  font-size: large;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box.correct{
+  background-color: greenyellow;
+}
+
+.box.incorrect{
+  background-color: rgb(245, 108, 108);
+}
+
+
+
+
