@@ -11,8 +11,8 @@ export default function Keyboard({
   incorrect,
   endGame,
 }) {
-  console.log("correct: ", correct);
-  console.log("incorrect: ", incorrect);
+  // console.log("correct: ", correct);
+  // console.log("incorrect: ", incorrect);
   return (
     <div className={styles.parent}>
       {KEYS.map((elem) => {

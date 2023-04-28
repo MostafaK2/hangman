@@ -7,10 +7,12 @@ import styles2 from "@/styles/Header.module.css";
 
 import React, { useEffect, useInsertionEffect } from "react";
 import { useState, useCallback } from "react";
+import axios from "axios";
 
-var testWord = "patiooot";
+// var testWord = "patiooot";
 
 export default function Home() {
+  const [testWord, setTestWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
   const [winGame, setWingame] = useState(false);
@@ -23,7 +25,27 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const difficulty = ["easy", "medium", "hard"];
+
+    const randIndex = Math.floor(Math.random() * difficulty.length);
+
+    const getRandomWord = async () => {
+      const { data } = await axios.get(
+        `api/generate-random-word/${difficulty[randIndex]}`
+      );
+      var lower = data.word.word;
+      lower = lower.toLowerCase();
+      console.log(lower);
+      setTestWord(lower);
+    };
+
+    getRandomWord();
+  }, []);
+
+  useEffect(() => {
     setWordToGuess(getUniqueChar(testWord));
+    console.log("word to guess: " + wordToGuess);
+    console.log("test word: " + testWord);
   }, [testWord]);
 
   const addGuessLetter = useCallback(
@@ -48,6 +70,9 @@ export default function Home() {
   );
 
   const getUniqueChar = (str) => {
+    if (str) {
+      str = str.toLowerCase();
+    }
     const uniqueChar = new Set(str);
     const charArray = Array.from(uniqueChar);
     return charArray;
