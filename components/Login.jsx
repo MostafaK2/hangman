@@ -5,9 +5,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Email: ${email}, Password: ${password}`);
+    try {
+      const response = await axios.post("/api/login", { email, password });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -30,7 +35,9 @@ function Login() {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className={styles.button} type="submit">Submit</button>
+        <button className={styles.button} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

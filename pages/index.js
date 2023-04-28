@@ -1,6 +1,8 @@
 import Hangman from "@/components/Hangman";
 import Header from "@/components/Header";
 import Keyboard from "@/components/Keyboard";
+import SignUp from "@/components/SignUp";
+import Login from "@/components/Login";
 import styles from "@/styles/Home.module.css";
 
 import React, { useEffect, useInsertionEffect } from "react";
@@ -62,6 +64,8 @@ export default function Home() {
 
   return (
     <div className={styles.main}>
+      <SignUp />
+      <Login />
       <Header onClick={resetGame} />
       <div className={styles.content}>
         <Hangman

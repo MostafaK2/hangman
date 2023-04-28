@@ -1,14 +1,25 @@
 import { useState } from "react";
-import styles from "../styles/Login-Signup.module.css"
+import styles from "../styles/Login-Signup.module.css";
+import signup from "../pages/api/signup";
+import axios from "axios";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    try {
+      const response = await axios.post("/api/signup", {
+        name,
+        email,
+        password,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
