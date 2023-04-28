@@ -95,6 +95,8 @@ export default function Home() {
   }, [guessedLetters]);
 
   useEffect(() => {
+    setGuessedLetters([]);
+    setWingame(false);
     fetchWord(diff);
     setOpenSettings(false);
   }, [diff]);
