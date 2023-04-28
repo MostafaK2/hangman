@@ -13,7 +13,7 @@ const HANGMAN = [HEAD, BODY, LEFT_ARM, RIGHT_ARM, LEFT_LEG, RIGHT_LEG];
 
 // drawing
 export default function Hangman({ word, correct, incorrect }) {
-  word = word.split("");
+  word = word && word.split("");
 
   return (
     <div className={styles.parent}>
@@ -25,7 +25,7 @@ export default function Hangman({ word, correct, incorrect }) {
         <div className={styles.base} />
       </div>
       <div className={styles.child}>
-        {word.map((elem) => {
+        {word && word.map((elem) => {
           var temp = "";
           const bool = correct.includes(elem) || incorrect.length > 5;
           if (bool) {

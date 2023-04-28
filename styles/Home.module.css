@@ -8,9 +8,47 @@
   margin: 0 auto;
   align-items: center;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+
+  border: 1px solid black;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding: 0 2rem;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  border-radius: 10px 10px;
+  background-color: bisque;
 }
 
-.start {
-  padding: 0.625rem;
+.stats {
+  border: 2px solid black;
+  padding: 0.5rem;
+  border-radius: 100px;
+}
+
+.stats.easy {
+  background-color: yellowgreen;
+}
+.stats.medium {
+  background-color: rgb(240, 240, 115);
+}
+
+.stats.hard {
+  background-color: red;
+  color: white;
+}
+
+.popup {
+  background-color: rgb(251, 251, 251);
+  height: 15rem;
+  width: 8rem;
+  border: 2px solid black;
+  border-radius: 10px 10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
 }
