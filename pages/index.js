@@ -24,34 +24,34 @@ export default function Home() {
   const [openSettings, setOpenSettings] = useState(false);
 
   const difficulty = ["easy", "medium", "hard"];
+  console.log(testWord);
 
   const handleStartGame = () => {
+    if (winGame || incorrectGuesses.length > 5) {
+      fetchWord(diff);
+    }
     setShowKeyboard(true);
     setWingame(false);
     setGuessedLetters([]);
   };
 
+  const fetchWord = async (randIndex) => {
+    const { data } = await axios.get(
+      `api/generate-random-word/${difficulty[randIndex]}`
+    );
+    var lower = data.word.word;
+    lower = lower.toLowerCase();
+    setTestWord(lower);
+  };
+
   useEffect(() => {
-    const difficulty = ["easy", "medium", "hard"];
-
     const randIndex = Math.floor(Math.random() * difficulty.length);
-
-    const getRandomWord = async () => {
-      const { data } = await axios.get(
-        `api/generate-random-word/${difficulty[randIndex]}`
-      );
-      var lower = data.word.word;
-      lower = lower.toLowerCase();
-      setTestWord(lower);
-    };
-
-    getRandomWord();
+    setDifficulty(randIndex);
+    fetchWord(randIndex);
   }, []);
 
   useEffect(() => {
     setWordToGuess(getUniqueChar(testWord));
-    console.log("word to guess: " + wordToGuess);
-    console.log("test word: " + testWord);
   }, [testWord]);
 
   const addGuessLetter = useCallback(
@@ -65,6 +65,7 @@ export default function Home() {
     setGuessedLetters([]);
     setWingame(false);
     // fetch the new word based on difficulty
+    fetchWord(diff);
   }, [guessedLetters, winGame]);
 
   const incorrectGuesses = guessedLetters.filter(
@@ -92,6 +93,11 @@ export default function Home() {
       setWingame(true);
     }
   }, [guessedLetters]);
+
+  useEffect(() => {
+    fetchWord(diff);
+    setOpenSettings(false);
+  }, [diff]);
 
   return (
     <div>
@@ -130,7 +136,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <Popup
+      <Popup
         open={openSettings}
         position="right top"
         closeOnDocumentClick
@@ -140,7 +146,7 @@ export default function Home() {
       >
         {console.log("diff: " + diff)}
         <Settings setDifficulty={setDifficulty} />
-      </Popup> */}
+      </Popup>
     </div>
   );
 }
