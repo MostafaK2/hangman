@@ -20,7 +20,7 @@ export default function Header({ page, onClick, setOpenSettings }) {
         ) : (
           <button
             className={styles["button-28"]}
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/dashboard")}
           >
             Game
           </button>
