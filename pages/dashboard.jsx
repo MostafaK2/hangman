@@ -23,10 +23,41 @@ function dashboard() {
   const [diff, setDifficulty] = useState(0);
   const [score, setScore] = useState(0);
 
+  const [highScore, setHighScore] = useState(0);
   const [openSettings, setOpenSettings] = useState(false);
 
   const difficulty = ["easy", "medium", "hard"];
+
+  const incorrectGuesses = guessedLetters.filter(
+    (elem) => !testWord.includes(elem)
+  );
+
+  const correctGuesses = guessedLetters.filter((elem) =>
+    testWord.includes(elem)
+  );
+
+  const scoreCounter = () => {
+    if (winGame) {
+      var temp = score;
+      temp += (diff + 1) * 10;
+      setScore(temp);
+    }
+    if (incorrectGuesses.length > 5) {
+      setScore(0);
+    }
+  };
   console.log(testWord);
+
+  useEffect(() => {
+    scoreCounter();
+  }, [winGame, incorrectGuesses.length > 5]);
+
+  useEffect(() => {
+    setHighScore(score);
+    localStorage.setItem("high", score);
+
+    // push into tne leaderboard
+  }, [score > highScore]);
 
   const handleStartGame = () => {
     if (winGame || incorrectGuesses.length > 5) {
@@ -47,9 +78,7 @@ function dashboard() {
   };
 
   useEffect(() => {
-    const randIndex = Math.floor(Math.random() * difficulty.length);
-    setDifficulty(randIndex);
-    fetchWord(randIndex);
+    fetchWord(diff);
   }, []);
 
   useEffect(() => {
@@ -70,14 +99,6 @@ function dashboard() {
     // fetch the new word based on difficulty
     fetchWord(diff);
   }, [guessedLetters, winGame]);
-
-  const incorrectGuesses = guessedLetters.filter(
-    (elem) => !testWord.includes(elem)
-  );
-
-  const correctGuesses = guessedLetters.filter((elem) =>
-    testWord.includes(elem)
-  );
 
   const getUniqueChar = (str) => {
     if (str) {
@@ -171,7 +192,8 @@ function dashboard() {
           )}
 
           <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-            <div className={styles.stats}>Score: {score}</div>
+            <div className={styles.stats}>{`High Score: ${highScore}`}</div>
+            <div className={styles.stats}>{`Score: ${score}`}</div>
             <div
               className={`${styles["stats"]} `}
             >{`Difficulty: ${difficulty[diff]}`}</div>
@@ -187,7 +209,6 @@ function dashboard() {
           setOpenSettings(false);
         }}
       >
-        {console.log("diff: " + diff)}
         <Settings setDifficulty={setDifficulty} />
       </Popup>
     </div>

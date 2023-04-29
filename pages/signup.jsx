@@ -4,16 +4,17 @@ import styles from "../styles/Login-Signup.module.css";
 // import clientPromise from "@/lib/db";
 import axios from "axios";
 
+import { useRouter } from "next/router";
+
 function signup() {
-  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post("/api/signup", {
-        name,
         username,
         password,
       });
@@ -21,20 +22,14 @@ function signup() {
     } catch (error) {
       console.log(error);
     }
+    router.push("/");
+    
   };
 
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
-        <input
-          className={styles.input}
-          placeholder="name"
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
 
         <input
           className={styles.input}
