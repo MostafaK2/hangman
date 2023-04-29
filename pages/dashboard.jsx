@@ -21,6 +21,7 @@ function dashboard() {
   const [winGame, setWingame] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [diff, setDifficulty] = useState(0);
+  const [score, setScore] = useState(0);
 
   const [openSettings, setOpenSettings] = useState(false);
 
@@ -65,6 +66,7 @@ function dashboard() {
   const resetGame = useCallback(() => {
     setGuessedLetters([]);
     setWingame(false);
+    setScore(0);
     // fetch the new word based on difficulty
     fetchWord(diff);
   }, [guessedLetters, winGame]);
@@ -102,6 +104,43 @@ function dashboard() {
     setOpenSettings(false);
   }, [diff]);
 
+  const points = {
+    a: 2,
+    b: 5,
+    c: 5,
+    d: 5,
+    e: 2,
+    f: 5,
+    g: 5,
+    h: 2,
+    i: 2,
+    j: 5,
+    k: 5,
+    l: 2,
+    m: 5,
+    n: 2,
+    o: 3,
+    p: 5,
+    q: 7,
+    r: 2,
+    s: 2,
+    t: 2,
+    u: 3,
+    v: 7,
+    w: 7,
+    x: 7,
+    y: 7,
+    z: 7,
+  };
+
+  const handleGuess = (letter) => {
+    if (testWord.includes(letter)) {
+      setScore(score + points[letter]);
+    } else {
+      return score;
+    }
+  };
+
   return (
     <div>
       <div className={styles.main}>
@@ -121,6 +160,7 @@ function dashboard() {
               incorrect={incorrectGuesses}
               correct={guessedLetters.filter((elem) => testWord.includes(elem))}
               endGame={incorrectGuesses.length > 5 || winGame}
+              handleGuess={handleGuess}
             />
           ) : (
             <button className={styles2["button-28"]} onClick={handleStartGame}>
@@ -131,7 +171,7 @@ function dashboard() {
           )}
 
           <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-            <div className={styles.stats}>Score: 30</div>
+            <div className={styles.stats}>Score: {score}</div>
             <div
               className={`${styles["stats"]} `}
             >{`Difficulty: ${difficulty[diff]}`}</div>
