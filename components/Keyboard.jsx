@@ -10,6 +10,7 @@ export default function Keyboard({
   correct,
   incorrect,
   endGame,
+  handleGuess,
 }) {
   // console.log("correct: ", correct);
   // console.log("incorrect: ", incorrect);
@@ -23,7 +24,10 @@ export default function Keyboard({
               const isDisabled = incorrect.includes(key);
               return (
                 <button
-                  onClick={() => addGuessLetter(key)}
+                  onClick={() => {
+                    addGuessLetter(key);
+                    handleGuess(key);
+                  }}
                   className={`${styles.btn} ${isActive ? styles.active : ""} ${
                     isDisabled ? styles.inactive : ""
                   }`}
