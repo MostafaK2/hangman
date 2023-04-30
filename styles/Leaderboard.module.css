@@ -2,23 +2,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px 10px;
+    
+    
+    
+    
 }
 
-.table, .td {
-    border: 1px solid black;
-    border-collapse: collapse;
+
+.table {
+    /* border-collapse: collapse; */
+    border-radius: 10px 10px;
+    
+    border-spacing: 0px;
 }
 .th {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
     font-weight: bold;
-    width: 10rem;
+    width: 15rem;
+    padding: 1rem;
+    border-radius: 10px 10px;
+    background-color: rgb(239, 191, 133);
+   
+    
 }
 
 .td {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    width: 10rem;
+    width: 15rem;
+    padding: 1rem;
+    border-radius: 10px 10px;
+    background-color: bisque;
 }

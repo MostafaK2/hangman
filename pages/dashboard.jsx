@@ -13,8 +13,6 @@ import Settings from "@/components/settings";
 import HangmanDrawing from "@/components/HangmanDrawing";
 // import withAuth from "@/components/withAuth";
 
-// var testWord = "patiooot";
-
 function dashboard() {
   const [testWord, setTestWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
@@ -59,16 +57,16 @@ function dashboard() {
     user = JSON.parse(user);
     const _id = user._id;
 
-    console.log("score"  + score);
-    console.log("high Score" + highScore)
+    console.log("score" + score);
+    console.log("high Score" + highScore);
 
     const postScore = async () => {
       const response = await axios.post("/api/leaderboard", { score, _id });
     };
-    if(score > highScore){
+    if (score > highScore) {
       postScore();
     }
-    
+
     // push into tne leaderboard
   }, [score > highScore]);
 
@@ -98,12 +96,12 @@ function dashboard() {
     console.log(user);
     const getLeaderboard = async () => {
       const result = await axios.get("api/leaderboard").then((data) => data);
-  
+
       const temp = result.data.filter((elem) => {
-        console.log(elem._id,  user._id, elem._id === user._id)
-        return elem._id === user._id
+        console.log(elem._id, user._id, elem._id === user._id);
+        return elem._id === user._id;
       });
-      console.log(temp)
+      console.log(temp);
       if (temp.length !== 0) {
         const k = parseInt(temp[0].score);
         console.log(k);

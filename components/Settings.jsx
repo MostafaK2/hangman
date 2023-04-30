@@ -35,7 +35,7 @@ export default function Settings({ setDifficulty, diff }) {
       >
         Hard
       </button>
-      <button className={styles.btn}>Log Out</button>
+      <button onClick = {() => {}} className={styles.btn}>Log Out</button>
     </div>
   );
 }
