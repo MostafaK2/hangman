@@ -13,7 +13,12 @@ import Settings from "@/components/settings";
 import HangmanDrawing from "@/components/HangmanDrawing";
 // import withAuth from "@/components/withAuth";
 
+import { useRouter } from "next/router";
+
 function dashboard() {
+  const router = useRouter();
+  const [testUser, setTestUser] = useState();
+
   const [testWord, setTestWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
@@ -93,6 +98,8 @@ function dashboard() {
   useEffect(() => {
     // object
     const user = JSON.parse(localStorage.getItem("user"));
+    setTestUser(user);
+
     console.log(user);
     const getLeaderboard = async () => {
       const result = await axios.get("api/leaderboard").then((data) => data);
@@ -163,8 +170,6 @@ function dashboard() {
   useEffect(() => {
     scoreCounter();
   }, [winGame]);
-
-  console.log(testWord);
 
   return (
     <div>

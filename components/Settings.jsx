@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import btn from "../styles/Header.module.css";
+import { useRouter } from "next/router";
 
 export default function Settings({ setDifficulty, diff }) {
+  const router = useRouter();
   return (
     <div className={styles.popup}>
       <button
@@ -35,7 +37,16 @@ export default function Settings({ setDifficulty, diff }) {
       >
         Hard
       </button>
-      <button onClick = {() => {}} className={styles.btn}>Log Out</button>
+      <button
+        onClick={() => {
+          localStorage.removeItem("user");
+          router.back()
+
+        }}
+        className={styles.btn}
+      >
+        Log Out
+      </button>
     </div>
   );
 }
