@@ -26,7 +26,6 @@ export default function Keyboard({
                 <button
                   onClick={() => {
                     addGuessLetter(key);
-                    handleGuess(key);
                   }}
                   className={`${styles.btn} ${isActive ? styles.active : ""} ${
                     isDisabled ? styles.inactive : ""

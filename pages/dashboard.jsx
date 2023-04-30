@@ -10,6 +10,7 @@ import React, { useEffect, useInsertionEffect } from "react";
 import { useState, useCallback } from "react";
 import axios from "axios";
 import Settings from "@/components/settings";
+import HangmanDrawing from "@/components/HangmanDrawing";
 // import withAuth from "@/components/withAuth";
 
 // var testWord = "patiooot";
@@ -26,6 +27,7 @@ function dashboard() {
   const [highScore, setHighScore] = useState(0);
   const [openSettings, setOpenSettings] = useState(false);
 
+  console.log(testWord);
   const difficulty = ["easy", "medium", "hard"];
 
   const incorrectGuesses = guessedLetters.filter(
@@ -125,48 +127,16 @@ function dashboard() {
     setOpenSettings(false);
   }, [diff]);
 
-  const points = {
-    a: 2,
-    b: 5,
-    c: 5,
-    d: 5,
-    e: 2,
-    f: 5,
-    g: 5,
-    h: 2,
-    i: 2,
-    j: 5,
-    k: 5,
-    l: 2,
-    m: 5,
-    n: 2,
-    o: 3,
-    p: 5,
-    q: 7,
-    r: 2,
-    s: 2,
-    t: 2,
-    u: 3,
-    v: 7,
-    w: 7,
-    x: 7,
-    y: 7,
-    z: 7,
-  };
-
-  const handleGuess = (letter) => {
-    if (testWord.includes(letter)) {
-      setScore(score + points[letter]);
-    } else {
-      return score;
-    }
-  };
+  useEffect(() => {
+    scoreCounter();
+  }, [winGame]);
 
   return (
     <div>
       <div className={styles.main}>
         <Header onClick={resetGame} setOpenSettings={setOpenSettings} />
         <div className={styles.content}>
+          <HangmanDrawing incorrect={incorrectGuesses} />
           <Hangman
             correct={correctGuesses}
             incorrect={incorrectGuesses}
@@ -181,10 +151,10 @@ function dashboard() {
               incorrect={incorrectGuesses}
               correct={guessedLetters.filter((elem) => testWord.includes(elem))}
               endGame={incorrectGuesses.length > 5 || winGame}
-              handleGuess={handleGuess}
+              // handleGuess={handleGuess}
             />
           ) : (
-            <button className={styles2["button-28"]} onClick={handleStartGame}>
+            <button className={`${styles2["start"]}`} onClick={handleStartGame}>
               {winGame || incorrectGuesses.length > 5
                 ? "Play Again"
                 : "Start game"}
@@ -195,7 +165,13 @@ function dashboard() {
             <div className={styles.stats}>{`High Score: ${highScore}`}</div>
             <div className={styles.stats}>{`Score: ${score}`}</div>
             <div
-              className={`${styles["stats"]} `}
+              className={`${styles["stats"]} ${
+                diff === 0
+                  ? styles.active0
+                  : diff === 1
+                  ? styles.active1
+                  : styles.active2
+              }`}
             >{`Difficulty: ${difficulty[diff]}`}</div>
           </div>
         </div>
@@ -203,13 +179,12 @@ function dashboard() {
 
       <Popup
         open={openSettings}
-        position="right top"
         closeOnDocumentClick
         onClose={() => {
           setOpenSettings(false);
         }}
       >
-        <Settings setDifficulty={setDifficulty} />
+        <Settings diff={diff} setDifficulty={setDifficulty} />
       </Popup>
     </div>
   );

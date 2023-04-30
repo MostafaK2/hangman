@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import styles from "../styles/Hangman.module.css";
 
@@ -17,13 +16,7 @@ export default function Hangman({ word, correct, incorrect }) {
 
   return (
     <div className={styles.parent}>
-      <div style={{ position: "relative", alignItems: "center" }}>
-        {HANGMAN.slice(0, incorrect.length)}
-        <div className={styles.noose2} />
-        <div className={styles.noose1} />
-        <div className={styles.stand} />
-        <div className={styles.base} />
-      </div>
+      
       <div className={styles.child}>
         {word && word.map((elem) => {
           var temp = "";
