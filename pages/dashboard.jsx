@@ -27,7 +27,6 @@ function dashboard() {
   const [highScore, setHighScore] = useState(0);
   const [openSettings, setOpenSettings] = useState(false);
 
-  console.log(testWord);
   const difficulty = ["easy", "medium", "hard"];
 
   const incorrectGuesses = guessedLetters.filter(
@@ -48,16 +47,28 @@ function dashboard() {
       setScore(0);
     }
   };
-  console.log(testWord);
 
   useEffect(() => {
     scoreCounter();
   }, [winGame, incorrectGuesses.length > 5]);
 
+  // propably make thhis efficient
   useEffect(() => {
     setHighScore(score);
-    localStorage.setItem("high", score);
+    var user = localStorage.getItem("user");
+    user = JSON.parse(user);
+    const _id = user._id;
 
+    console.log("score"  + score);
+    console.log("high Score" + highScore)
+
+    const postScore = async () => {
+      const response = await axios.post("/api/leaderboard", { score, _id });
+    };
+    if(score > highScore){
+      postScore();
+    }
+    
     // push into tne leaderboard
   }, [score > highScore]);
 
@@ -79,7 +90,31 @@ function dashboard() {
     setTestWord(lower);
   };
 
+  //  some other api call to get indivual leaderboard score
+  // gets the leaderboard  and finds the high score of playerand fetches random word
   useEffect(() => {
+    // object
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    const getLeaderboard = async () => {
+      const result = await axios.get("api/leaderboard").then((data) => data);
+  
+      const temp = result.data.filter((elem) => {
+        console.log(elem._id,  user._id, elem._id === user._id)
+        return elem._id === user._id
+      });
+      console.log(temp)
+      if (temp.length !== 0) {
+        const k = parseInt(temp[0].score);
+        console.log(k);
+        setHighScore(k);
+      }
+      return 0;
+    };
+
+    if (user) {
+      getLeaderboard();
+    }
     fetchWord(diff);
   }, []);
 
@@ -130,6 +165,8 @@ function dashboard() {
   useEffect(() => {
     scoreCounter();
   }, [winGame]);
+
+  console.log(testWord);
 
   return (
     <div>

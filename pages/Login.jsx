@@ -4,8 +4,6 @@ import styles from "../styles/Login-Signup.module.css";
 import Link from "next/link";
 import axios from "axios";
 
-
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,11 +14,10 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post("/api/login", { username, password });
-      console.log(response.data);
+      console.log(response.data[0]);
       router.push("/dashboard");
       // get the high score for particular user
-      localStorage.setItem("high", 10);
-      
+      localStorage.setItem("user", JSON.stringify(response.data[0]));
     } catch (error) {
       console.log(error);
     }
