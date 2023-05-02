@@ -9,7 +9,7 @@ import Popup from "reactjs-popup";
 import React, { useEffect, useInsertionEffect } from "react";
 import { useState, useCallback } from "react";
 import axios from "axios";
-import Settings from "@/components/settings";
+import Settings from "@/components/Settings";
 import HangmanDrawing from "@/components/HangmanDrawing";
 // import withAuth from "@/components/withAuth";
 
